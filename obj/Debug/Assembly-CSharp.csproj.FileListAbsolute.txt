@@ -1,0 +1,2 @@
+/Users/barclaysskybar/Desktop/roll the ball/obj/Debug/Assembly-CSharp.csprojAssemblyReference.cache
+/Users/barclaysskybar/Desktop/roll the ball/obj/Debug/Assembly-CSharp.csproj.CoreCompileInputs.cache
