@@ -17,6 +17,7 @@ public class Spawn : MonoBehaviour {
         CalculateBounds();  //calculate the boundaries of plane to generate random values for positions of spawning
         InitialiseSpawnData(); //initialise GameObject Data from enemy.json
     }
+    
 
     private void InitialiseSpawnData()
     {
@@ -38,8 +39,7 @@ public class Spawn : MonoBehaviour {
     }
 
     void Start () {
-
-
+        GameManager.InitiateGame += StartGame; 
     }
 
     private void CalculateBounds(){
@@ -79,6 +79,10 @@ public class Spawn : MonoBehaviour {
                                  Random.Range(minZ, maxZ));                     
         return randomPos;
     }
-	
-	
+	void OnDisable()
+    {
+
+        GameManager.InitiateGame -= StartGame;
+    }
+
 }

@@ -6,15 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
 
+    public delegate void GameInitiation();
+    public static event GameInitiation InitiateGame;
     int currentTimer;
     public GameObject timeValue;
     TMP_Text timeValueText;
     public GameObject gameOver;
     public bool gameStarted = false;
+    static GameManager _instance; //Singleton Instance
+    void Awake()
+    {
+        if(_instance != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            _instance = this;
+        }
+    }
 
-
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
 
         //Initialize Components
         timeValueText = timeValue.GetComponent<TMP_Text>();
@@ -84,8 +97,9 @@ public class GameManager : MonoBehaviour {
         -Enable ball movement */
         gameStarted = true;
         StartCoroutine("Counter");
-        GameObject.Find("Start Game").GetComponent<Animator>().Play("Disappear");
-        GetComponent<Spawn>().StartGame();
-        GameObject.Find("Ball").GetComponent<BallController>().gameStarted = true;
+        if(InitiateGame != null)
+        {
+            InitiateGame();
+        }
     }
 }
